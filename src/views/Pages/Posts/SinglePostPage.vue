@@ -37,8 +37,9 @@ export default {
   methods: {
     async getComments() {
       try {
-        const response = await this.$apiService.comments.fetch(
-          "posts/" + this.$route.params.postId + "/comments"
+        console.log(this.$route.params.postId)
+        const response = await this.$apiService.comments.get(
+         this.$route.params.postId + '/comments'
         );
         this.comments = response.data;
       } catch (e) {

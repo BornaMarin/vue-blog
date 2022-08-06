@@ -50,7 +50,7 @@ class PostsApiService extends ReadOnlyApiService {
 }
 class CommentsApiService extends ReadOnlyApiService {
   constructor() {
-    super("posts");
+    super(`posts`);
   }
 }
 
