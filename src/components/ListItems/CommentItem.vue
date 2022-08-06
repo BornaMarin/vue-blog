@@ -1,5 +1,5 @@
 <template>
-  <div class="comment">
+  <div class="comment" v-if="comment && comment.email">
     <div class="comment-connector">
       <div class="comment-connector-line" />
       <div class="comment-connector-curved-line" />
