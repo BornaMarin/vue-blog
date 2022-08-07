@@ -34,9 +34,15 @@ const isObject = (value) => {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 };
 
+const capitalize = (value) => {
+  const newValue = valueCheckStringFormat(value);
+  return newValue.charAt(0).toUpperCase() + newValue.slice(1);
+};
+
 export {
   formatOwnerUsername,
   getAcronymFromFullName,
   groupById,
   isObjectEmpty,
+  capitalize,
 };

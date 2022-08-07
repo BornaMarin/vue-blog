@@ -1,7 +1,7 @@
 import { shallowMount } from "@vue/test-utils";
 import CommentItem from "@/components/ListItems/CommentItem";
 describe("CommentItem.vue", () => {
-  it("renders props comment.email when passed", async () => {
+  it("renders props when passed", async () => {
     const props = {
       comment: {
         email: "email",
@@ -11,8 +11,7 @@ describe("CommentItem.vue", () => {
     const wrapper = shallowMount(CommentItem, {
       propsData: props,
     });
-    console.debug("Message here", wrapper.props(), "end");
-    expect(wrapper.props().email).toBe(props.email);
-    expect(wrapper.props().email).toBe(props.email);
+    expect(wrapper.text()).toContain(props.comment.email);
+    expect(wrapper.text()).toContain(props.comment.body);
   });
 });

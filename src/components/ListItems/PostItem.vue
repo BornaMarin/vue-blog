@@ -7,7 +7,7 @@
     <div class="post-content">
       <owner-info :owner="user" />
       <div class="post-content-header">
-        <p>{{ post.title | capitalize }}</p>
+        <p>{{ capitalize(post.title) }}</p>
       </div>
       <div class="post-content-main">
         <p>{{ post.body }}</p>
@@ -19,7 +19,7 @@
 <script>
 import OwnerInfo from "@/components/UI/OwnerInfo";
 import OwnerAcronymBubble from "@/components/UI/OwnerAcronymBubble";
-import { getAcronymFromFullName } from "@/helpers/HelperFunctions";
+import { getAcronymFromFullName, capitalize } from "@/helpers/HelperFunctions";
 export default {
   components: {
     OwnerInfo,
@@ -37,6 +37,7 @@ export default {
   },
   methods: {
     getAcronymFromFullName,
+    capitalize,
   },
 };
 </script>

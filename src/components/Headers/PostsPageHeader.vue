@@ -8,11 +8,20 @@
       <font-awesome-icon icon="fa-solid fa-arrow-left" size="2x" />
     </div>
     <template v-else>
-      <h2>{{ $route.name | capitalize }}</h2>
+      <h2>{{ capitalize($route.name) }}</h2>
     </template>
     <slot />
   </div>
 </template>
+
+<script>
+import { capitalize } from "@/helpers/HelperFunctions";
+export default {
+  methods: {
+    capitalize,
+  },
+};
+</script>
 
 <style lang="scss">
 @import "@/assets/theme/colors.scss";
