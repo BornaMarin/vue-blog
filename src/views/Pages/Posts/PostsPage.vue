@@ -15,15 +15,24 @@
       />
     </post-page-header>
     <div class="posts-container">
-      <post-item
-        class="posts-item"
-        v-for="post in posts"
-        :id="post.id"
-        :key="post.id"
-        :post="post"
-        :user="getPostOwner(post)"
-        @click.native="storePostAndRedirectToSingle(post)"
-      />
+      <template v-for="post in posts">
+        <post-item
+          class="posts-item"
+          :id="post.id"
+          :key="post.id"
+          :post="post"
+          :user="getPostOwner(post)"
+          @click.native="storePostAndRedirectToSingle(post)"
+          @showComments="toggleCommentsSection(post)"
+        />
+        <template v-if="+postsParams.expandedPostId === post.id">
+          <comment-item
+            v-for="comment in post.comments.slice(0, 2)"
+            :key="`comment-${comment.id}`"
+            :comment="comment"
+          />
+        </template>
+      </template>
     </div>
     <standard-pagination
       v-if="posts && posts.length && +postsParams._limit !== 100"
@@ -45,9 +54,12 @@ import isEqual from "lodash/isEqual";
 import SessionStorageMixin from "@/mixins/SessionStorageMixin";
 import routeTypes from "@/constants/routes";
 import StandardPagination from "@/components/Paginations/StandardPagination";
+import CommentItem from "@/components/Celltems/CommentItem";
 
 export default {
+  name: "PostsPage",
   components: {
+    CommentItem,
     StandardPagination,
     FieldInput,
     PostItem,
@@ -70,10 +82,19 @@ export default {
         _limit: 10,
         userId: null,
         search: "",
+        _embed: "comments",
+        expandedPostId: null,
       },
     };
   },
   methods: {
+    toggleCommentsSection(post) {
+      if (this.postsParams.expandedPostId === post.id) {
+        this.postsParams.expandedPostId = null;
+      } else {
+        this.postsParams.expandedPostId = post.id;
+      }
+    },
     async handlePageChange(value) {
       this.postsParams._page = value;
       await this.getPosts();
@@ -143,11 +164,15 @@ export default {
     },
     setupQueryParams() {
       const query = this.$route.query;
+      console.log(query);
       if (isObjectEmpty(query)) {
         this.$router.push({ query: this.postsParams });
       } else {
-        Object.assign(this.postsParams, query);
+        // instead of Object.assign(this.postsParams, query);
+        // for vue reactivity
+        this.postsParams = Object.assign({}, this.postsParams, query);
       }
+      console.log(this.postsParams);
     },
     scrollToSpecificElement() {
       const target = document.getElementById(this.$route.query?.postId);
@@ -167,6 +192,7 @@ export default {
 
 <style lang="scss">
 @import "@/assets/theme/colors.scss";
+@import "@/assets/transitions/dropdown.scss";
 
 .posts {
   width: 100%;

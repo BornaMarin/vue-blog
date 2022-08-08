@@ -12,6 +12,15 @@
       <div class="post-content-main">
         <p>{{ post.body }}</p>
       </div>
+      <div class="post-content-fotter">
+        <button
+          @click.stop="emitCommentBtnEvent"
+          class="post-content-fotter-button"
+        >
+          <font-awesome-icon icon="fa-solid fa-comment" size="lg" />
+          {{ post.comments.length }} Comments
+        </button>
+      </div>
     </div>
   </article>
 </template>
@@ -38,6 +47,9 @@ export default {
   methods: {
     getAcronymFromFullName,
     capitalize,
+    emitCommentBtnEvent() {
+      this.$emit("showComments");
+    },
   },
 };
 </script>
@@ -64,6 +76,21 @@ export default {
       p {
         margin: 8px 0;
         font-weight: bold;
+      }
+    }
+    &-fotter {
+      display: flex;
+      justify-content: end;
+      &-button {
+        padding: 8px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: $color-bg;
+        color: $color-light-gray;
+        &:hover {
+          color: rgba($color: $color-blue, $alpha: 1);
+        }
       }
     }
   }

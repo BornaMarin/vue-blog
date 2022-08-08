@@ -8,13 +8,14 @@ import {
   faSpinner,
   faAngleLeft,
   faAngleRight,
+  faComment,
 } from "@fortawesome/free-solid-svg-icons";
 import router from "./router";
 import VueMeta from "vue-meta";
 
 Vue.config.productionTip = false;
 
-library.add(faArrowLeft, faSpinner, faAngleLeft, faAngleRight);
+library.add(faArrowLeft, faSpinner, faAngleLeft, faAngleRight, faComment);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 //we could define filters here, but we will end up having dirty vue instances.. better to use helper functions

@@ -1,7 +1,7 @@
 <template>
   <div id="app" style="min-height: 100%">
     <component :is="layout">
-      <transition name="fade" mode="out-in">
+      <transition appear name="fade" mode="out-in">
         <router-view />
       </transition>
     </component>
@@ -55,6 +55,6 @@ body,
 body {
   background-color: $color-bg;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-  Arial, sans-serif;
+    Arial, sans-serif;
 }
 </style>
