@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import OwnerInfo from "@/components/UI/OwnerInfo";
-import OwnerAcronymBubble from "@/components/UI/OwnerAcronymBubble";
+import OwnerInfo from "@/components/DumbComponents/OwnerInfo";
+import OwnerAcronymBubble from "@/components/DumbComponents/OwnerAcronymBubble";
 import { getAcronymFromFullName, capitalize } from "@/helpers/HelperFunctions";
 export default {
   components: {

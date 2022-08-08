@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import PostItem from "@/components/ListItems/PostItem";
+import PostItem from "@/components/Celltems/PostItem";
 import { capitalize } from "@/helpers/HelperFunctions";
 describe("CommentItem.vue", () => {
   it("renders props when passed", async () => {

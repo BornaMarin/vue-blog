@@ -1,8 +1,6 @@
 <template>
   <div class="layout">
-    <div class="layout-main">
-      <slot />
-    </div>
+    <slot />
   </div>
 </template>
 
@@ -15,18 +13,14 @@ export default {
 <style lang="scss">
 @import "@/assets/theme/colors.scss";
 .layout {
-  min-height: 100%;
+  min-height: 100vh;
   max-width: 660px;
   width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  &-main {
-    border-right: $border-dark;
-    border-left: $border-dark;
-    width: 100%;
-    min-height: 100vh;
-  }
+  border-right: $border-dark;
+  border-left: $border-dark;
 }
 .back-button {
   cursor: pointer;

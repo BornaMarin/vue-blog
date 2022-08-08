@@ -14,11 +14,11 @@
 </template>
 
 <script>
-import PostItem from "@/components/ListItems/PostItem";
+import PostItem from "@/components/Celltems/PostItem";
 import PostPageHeader from "@/components/Headers/PostsPageHeader";
-import CommentItem from "@/components/ListItems/CommentItem";
+import CommentItem from "@/components/Celltems/CommentItem";
 import SessionStorageMixin from "@/mixins/SessionStorageMixin";
-import LoadingSpinner from "@/components/UI/LoadingSpinner";
+import LoadingSpinner from "@/components/DumbComponents/LoadingSpinner";
 export default {
   mixins: [SessionStorageMixin],
   components: {
@@ -65,7 +65,7 @@ export default {
     },
   },
   async created() {
-    //we can choose to fetch and store single post in session storage or fetch it from the server
+    //we can choose to fetch single post info from session storage or fetch it from the server
     this.user = this.fetchFromSessionStorage("user");
     this.post = this.fetchFromSessionStorage("post");
 

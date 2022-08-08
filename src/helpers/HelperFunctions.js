@@ -1,5 +1,5 @@
 const formatOwnerUsername = (value) => {
-  const newValue = valueCheckStringFormat(value);
+  const newValue = checkAndFormatToString(value);
   return "@" + newValue;
 };
 
@@ -18,7 +18,7 @@ const groupById = (target) => {
   return objToReturn;
 };
 
-const valueCheckStringFormat = (value) => {
+const checkAndFormatToString = (value) => {
   if (!value) return "";
   return value.toString();
 };
@@ -35,7 +35,7 @@ const isObject = (value) => {
 };
 
 const capitalize = (value) => {
-  const newValue = valueCheckStringFormat(value);
+  const newValue = checkAndFormatToString(value);
   return newValue.charAt(0).toUpperCase() + newValue.slice(1);
 };
 

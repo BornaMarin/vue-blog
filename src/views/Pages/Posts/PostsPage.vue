@@ -11,7 +11,7 @@
         type="search"
         :value="postsParams.search"
         @input="handleSearch"
-        @focused="handleFocus"
+        @focused="handleSearchFocus"
       />
     </post-page-header>
     <div class="posts-container">
@@ -22,7 +22,7 @@
         :key="post.id"
         :post="post"
         :user="getPostOwner(post)"
-        @click.native="storeAndRedirect(post)"
+        @click.native="storePostAndRedirectToSingle(post)"
       />
     </div>
     <standard-pagination
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import PostItem from "@/components/ListItems/PostItem";
+import PostItem from "@/components/Celltems/PostItem";
 import PostPageHeader from "@/components/Headers/PostsPageHeader";
 import { groupById, isObjectEmpty } from "@/helpers/HelperFunctions";
 import FieldInput from "@/components/FormInputs/FieldInput";
@@ -44,7 +44,7 @@ import debounce from "lodash/debounce";
 import isEqual from "lodash/isEqual";
 import SessionStorageMixin from "@/mixins/SessionStorageMixin";
 import routeTypes from "@/constants/routes";
-import StandardPagination from "@/components/UI/StandardPagination";
+import StandardPagination from "@/components/Paginations/StandardPagination";
 
 export default {
   components: {
@@ -101,7 +101,7 @@ export default {
     getPostOwner(post) {
       return this.users[post.userId.toString()];
     },
-    storeAndRedirect(post) {
+    storePostAndRedirectToSingle(post) {
       this.storeInSessionStorage("post", post);
       this.storeInSessionStorage("user", this.getPostOwner(post));
       if (
@@ -138,7 +138,7 @@ export default {
         }
       }
     }, 500),
-    handleFocus() {
+    handleSearchFocus() {
       this.isSearchFocused = !this.isSearchFocused;
     },
     setupQueryParams() {
@@ -174,7 +174,7 @@ export default {
   &-item {
     cursor: pointer;
   }
-  //clumsy way to handle sticky pagination jumping :D
+  //clumsy way to handle sticky pagination jumping :D, task is not css focused
   &-container {
     min-height: 1200px;
   }

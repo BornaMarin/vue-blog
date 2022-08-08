@@ -42,6 +42,8 @@ export default {
       default: "",
     },
   },
+  //overriding computed value getter and setter
+  //so we can use v-model=computedValue
   computed: {
     computedValue: {
       get() {

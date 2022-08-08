@@ -1,5 +1,5 @@
 import { shallowMount } from "@vue/test-utils";
-import CommentItem from "@/components/ListItems/CommentItem";
+import CommentItem from "@/components/Celltems/CommentItem";
 describe("CommentItem.vue", () => {
   it("renders props when passed", async () => {
     const props = {
