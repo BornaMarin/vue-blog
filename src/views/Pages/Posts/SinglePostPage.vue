@@ -1,5 +1,5 @@
 <template>
-  <div ref="scrollable" id="anchor2">
+  <div>
     <post-page-header />
     <post-item :post="post" :user="user" />
     <template v-if="comments && comments.length">
@@ -37,9 +37,8 @@ export default {
   methods: {
     async getComments() {
       try {
-        console.log(this.$route.params.postId)
         const response = await this.$apiService.comments.get(
-         this.$route.params.postId + '/comments'
+          this.$route.params.postId + "/comments"
         );
         this.comments = response.data;
       } catch (e) {

@@ -1,5 +1,6 @@
 <template>
   <div class="comment">
+    <!--    usually it is better to add appropriate svg instead of empty divs with css-->
     <div class="comment-connector">
       <div class="comment-connector-line" />
       <div class="comment-connector-curved-line" />

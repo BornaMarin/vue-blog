@@ -13,7 +13,7 @@ class BaseApiService {
   }
 
   handleErrors() {
-    throw new Error("we handle error logic in here");
+    throw new Error("we handle error logic here");
   }
 }
 

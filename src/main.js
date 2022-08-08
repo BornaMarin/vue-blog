@@ -17,6 +17,7 @@ Vue.config.productionTip = false;
 library.add(faArrowLeft, faSpinner, faAngleLeft, faAngleRight);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
+//we could define filters here, but we will end up having dirty vue instances.. better to use helper functions
 // Vue.filter("capitalize", function (value) {
 //   if (!value) return "";
 //   value = value.toString();

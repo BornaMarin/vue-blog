@@ -25,7 +25,6 @@
         @click.native="storeAndRedirect(post)"
       />
     </div>
-
     <standard-pagination
       v-if="posts && posts.length && +postsParams._limit !== 100"
       :page="+this.postsParams._page"
@@ -85,14 +84,14 @@ export default {
     },
     async getPosts() {
       const response = await this.$apiService.posts.fetch(this.postsParams);
-      this.posts = response.data;
+      this.posts = response?.data;
     },
     async getUsers() {
       const response = await this.$apiService.users.fetch();
 
       //Avoid looping users array every time we need a single user
       //When we need a specific user for a specific post -> this.users[post.userId]
-      //Usually we get user object on a single post..
+      //Usually we get user object on a single post...
 
       this.users = groupById(response.data);
 
@@ -118,7 +117,7 @@ export default {
       this.$router.push(`${routeTypes.posts.path}/${post.id}`);
     },
     handleSearch: debounce(async function (searchValue) {
-      //Docs had author query (/posts?author=typicode), but I think api has changed.. We only have userId query
+      //Docs had author query (/posts?author=typicode), but I think api has changed.. We only have userId query now
       //todo I will hack my way around.. dont do this at work!!!!
       this.postsParams.search = searchValue;
       if (!searchValue) {
@@ -131,7 +130,7 @@ export default {
         );
         if (foundUser) {
           this.postsParams.userId = foundUser.id;
-          //sadly I have to reset pagination and set limit to 100, there is no good way to handle pagination when searching user, api functionality is limited :(
+          //sadly I have to reset pagination and set limit to 100, there is no good way to handle pagination when searching for user, api functionality is limited :(
           this.postsParams._page = 1;
           this.postsParams._limit = 100;
           this.$router.replace({ query: this.postsParams });
