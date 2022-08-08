@@ -25,7 +25,7 @@ Runs basic tests for main components.
 
 ### `npm run build`
 
-Builds the app for production.\
+Builds the app for production to the `dist` folder.\
 The build is minified.\
 Your app is ready to be deployed!
 
