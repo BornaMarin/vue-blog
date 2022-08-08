@@ -1,7 +1,7 @@
 <template>
   <div>
     <post-page-header />
-    <post-item :post="post" :user="user" />
+    <post-item :post="post" :user="user" hide-action-btn />
     <template v-if="comments && comments.length">
       <comment-item
         v-for="comment in comments"
@@ -73,8 +73,6 @@ export default {
     // await this.getOwner();
 
     await this.getComments();
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
   },
 };
 </script>

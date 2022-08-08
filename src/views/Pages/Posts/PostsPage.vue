@@ -15,7 +15,7 @@
       />
     </post-page-header>
     <div class="posts-container">
-      <template v-for="post in posts">
+      <template v-for="(post, index) in posts">
         <post-item
           class="posts-item"
           :id="post.id"
@@ -23,11 +23,13 @@
           :post="post"
           :user="getPostOwner(post)"
           @click.native="storePostAndRedirectToSingle(post)"
-          @showComments="toggleCommentsSection(post)"
+          @showComments="toggleCommentsSection(post, index)"
         />
-        <template v-if="+postsParams.expandedPostId === post.id">
+        <template
+          v-if="post.expanded || +postsParams.expandedPostId === post.id"
+        >
           <comment-item
-            v-for="comment in post.comments.slice(0, 2)"
+            v-for="comment in post.comments"
             :key="`comment-${comment.id}`"
             :comment="comment"
           />
@@ -77,6 +79,7 @@ export default {
       posts: [],
       users: {},
       usersForSearch: [],
+      expendedPosts: [],
       postsParams: {
         _page: 1,
         _limit: 10,
@@ -88,12 +91,11 @@ export default {
     };
   },
   methods: {
-    toggleCommentsSection(post) {
-      if (this.postsParams.expandedPostId === post.id) {
-        this.postsParams.expandedPostId = null;
-      } else {
-        this.postsParams.expandedPostId = post.id;
-      }
+    toggleCommentsSection(post, index) {
+      post.expanded = !post.expanded;
+      //vue reactivity
+      this.$set(this.posts, index, { ...post });
+      if (post.expanded) this.scrollToSpecificElement(post.id);
     },
     async handlePageChange(value) {
       this.postsParams._page = value;
@@ -164,21 +166,19 @@ export default {
     },
     setupQueryParams() {
       const query = this.$route.query;
-      console.log(query);
       if (isObjectEmpty(query)) {
         this.$router.push({ query: this.postsParams });
       } else {
-        // instead of Object.assign(this.postsParams, query);
         // for vue reactivity
         this.postsParams = Object.assign({}, this.postsParams, query);
       }
-      console.log(this.postsParams);
     },
-    scrollToSpecificElement() {
-      const target = document.getElementById(this.$route.query?.postId);
-      const headerHeight = 80;
-      const y = target?.getBoundingClientRect().top - headerHeight;
-      window.scrollTo({ top: y ? y : 0, behavior: "smooth" });
+    async scrollToSpecificElement(id) {
+      await this.$nextTick();
+      const target = document.getElementById(
+        id ? id : this.$route.query?.postId
+      );
+      target?.scrollIntoView({ behavior: "smooth" });
     },
   },
   async created() {
@@ -198,6 +198,7 @@ export default {
   width: 100%;
   min-height: 600px;
   &-item {
+    scroll-margin-top: 80px;
     cursor: pointer;
   }
   //clumsy way to handle sticky pagination jumping :D, task is not css focused

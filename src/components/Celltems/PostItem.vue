@@ -12,7 +12,7 @@
       <div class="post-content-main">
         <p>{{ post.body }}</p>
       </div>
-      <div class="post-content-fotter">
+      <div v-if="!hideActionBtn" class="post-content-fotter">
         <button
           @click.stop="emitCommentBtnEvent"
           class="post-content-fotter-button"
@@ -42,6 +42,10 @@ export default {
     user: {
       type: Object,
       default: () => {},
+    },
+    hideActionBtn: {
+      type: Boolean,
+      default: false,
     },
   },
   methods: {
