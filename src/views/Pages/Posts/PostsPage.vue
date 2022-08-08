@@ -6,7 +6,7 @@
         :class="{ focused: isSearchFocused }"
         id="posts-search"
         name="postsSearch"
-        placeholder="Search creator"
+        placeholder="Search by creator name"
         ariaLabel="Search post creator"
         type="search"
         :value="postsParams.search"
@@ -25,9 +25,7 @@
           @click.native="storePostAndRedirectToSingle(post)"
           @showComments="toggleCommentsSection(post, index)"
         />
-        <template
-          v-if="post.expanded || +postsParams.expandedPostId === post.id"
-        >
+        <template v-if="post.expanded">
           <comment-item
             v-for="comment in post.comments"
             :key="`comment-${comment.id}`"
@@ -86,7 +84,6 @@ export default {
         userId: null,
         search: "",
         _embed: "comments",
-        expandedPostId: null,
       },
     };
   },
@@ -116,10 +113,10 @@ export default {
       //When we need a specific user for a specific post -> this.users[post.userId]
       //Usually we get user object on a single post...
 
-      this.users = groupById(response.data);
+      this.users = groupById(response?.data);
 
       //ignore this
-      this.usersForSearch = response.data;
+      this.usersForSearch = response?.data;
     },
     getPostOwner(post) {
       return this.users[post.userId.toString()];

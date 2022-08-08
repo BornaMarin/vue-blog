@@ -45,24 +45,6 @@ export default {
         console.log("handle error here");
       }
     },
-    async getOwner() {
-      try {
-        const response = await this.$axios.get("users/" + this.post.userId);
-        this.user = response.data;
-      } catch (e) {
-        console.log(e);
-      }
-    },
-    async getSinglePost() {
-      try {
-        const response = await this.$axios.get(
-          "posts/" + this.$route.params.postId
-        );
-        this.post = response.data;
-      } catch (e) {
-        console.log("handle error here");
-      }
-    },
   },
   async created() {
     //we can choose to fetch single post info from session storage or fetch it from the server

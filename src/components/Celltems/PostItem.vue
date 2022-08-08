@@ -14,6 +14,7 @@
       </div>
       <div v-if="!hideActionBtn" class="post-content-fotter">
         <button
+          aria-label="Show Comments"
           @click.stop="emitCommentBtnEvent"
           class="post-content-fotter-button"
         >

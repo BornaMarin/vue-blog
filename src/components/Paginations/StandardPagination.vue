@@ -1,6 +1,7 @@
 <template>
   <div class="pagination">
     <button
+      aria-label="Previous page"
       class="pagination-item"
       :hidden="isLeftButtonHidden"
       @click="handlePageChange(page - 1)"
@@ -8,6 +9,7 @@
       <font-awesome-icon icon="fa-solid fa-angle-left" size="lg" />
     </button>
     <button
+      aria-label="Pagination cell"
       v-for="item in range(paginationCentarPage - 2, paginationCentarPage + 2)"
       :key="item"
       class="pagination-item"
@@ -17,6 +19,7 @@
       {{ item }}
     </button>
     <button
+      aria-label="Next page"
       class="pagination-item"
       :hidden="isRightButtonHidden"
       @click="handlePageChange(page + 1)"
