@@ -5,7 +5,7 @@ This project was bootstrapped with [Vue CLI](https://cli.vuejs.org/guide/#cli).
 ## Start Project
 
 ### `git clone https://github.com/BornaMarin/vue-blog.git`
-### `cd master`
+### `git checkout master`
 ### `npm i`
 ### `npm run start`
 
